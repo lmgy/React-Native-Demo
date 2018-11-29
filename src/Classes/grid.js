@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Util from './util.js';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { Modal, Button, Drawer, List, WhiteSpace } from 'antd-mobile-rn';
+import { Modal, Button, Drawer, List, WhiteSpace, WingBlank } from 'antd-mobile-rn';
 import Dimensions from 'Dimensions';
 const { width, height } = Dimensions.get('window');
 
@@ -185,9 +185,12 @@ export default class Grids extends Component {
                     <Text style={styles.textMessage}>{this.state.showItem.fClasstime}节</Text>
                 </View>
                 </View>
+                <WingBlank>
                 <Button type="primary" inline onClick={this.onClose}>
                 返 回
                 </Button>
+                </WingBlank>
+                <WhiteSpace size="lg"/>
                 </Modal>
 
                 <View style={{ height: 30 }}>

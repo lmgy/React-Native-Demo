@@ -21,6 +21,9 @@ import StuGrade from './src/view/StuGrade';
 import Bind from './src/view/Bind';
 import NewsDetail from './src/view/NewsDetail';
 
+import applyClassroom from './src/view/applyClassroom';
+import busCardMoney from './src/view/busCardMoney';
+
 // import ReminderContainer from './src/view/day20';
 
 
@@ -228,9 +231,9 @@ Tab.navigationOptions = ({ navigation }) => {
         case 'Classes':
             title = '课表';
             break;
-        case 'ShopCar':
-            title = '购物车';
-            break;
+        // case 'ShopCar':
+        //     title = '购物车';
+        //     break;
         case 'Mine':
             header = null;
             return {
@@ -265,6 +268,10 @@ export default Navi = createStackNavigator(
         Bind: { screen: Bind },
         NewsDetail: { screen: NewsDetail },
         StuGrade: { screen: StuGrade },
+
+        busCardMoney: { screen: busCardMoney },
+        applyClassroom: { screen: applyClassroom },
+
         LoginView: { 
             screen: LoginView,
             navigationOptions: () => ({

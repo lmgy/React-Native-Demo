@@ -79,13 +79,13 @@ export default class Classes extends Component {
                     offsetX={Util.size.width * 0.11}
                     offsetY={Util.size.height * 0.09}
                     >
-                        <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => {}}>
+                        <ActionButton.Item buttonColor='#9b59b6' title="新建安排" onPress={() => {}}>
                             <Icon name="md-create" style={styles.actionButtonIcon} />
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#ff856c' title="Notifications" onPress={() => {}}>
+                        <ActionButton.Item buttonColor='#ff856c' title="关闭提醒" onPress={() => {}}>
                             <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
+                        <ActionButton.Item buttonColor='#1abc9c' title="查看所有安排" onPress={() => {}}>
                             <Icon name="md-done-all" style={styles.actionButtonIcon} />
                         </ActionButton.Item>
                     </ActionButton>

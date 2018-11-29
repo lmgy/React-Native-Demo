@@ -15,7 +15,6 @@ import {
 import { Button } from 'react-native-elements'
 
 
-
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -33,7 +32,9 @@ class LoginViewScreen extends Component {
       username: '请输入学号',
       password: '',
       login_failed: false,
-      showLoading: false
+      showLoading: false,
+      
+      value:''
     };
 
   }
@@ -154,15 +155,20 @@ class LoginViewScreen extends Component {
                 </View>
               </View>
 
+
               <View style={styles.loginInput}>
                 <TextInput
                 placeholder={this.state.username}
+                placeholderTextColor="white"
+                underlineColorAndroid="white"
                 clearButtonMode="always"
                 style={styles.inputStyle}
                 onChangeText={username => this.setState({ username })}
                 />
                 <TextInput
                 placeholder="请输入身份证后六位"
+                placeholderTextColor="white"
+                underlineColorAndroid="white"
                 clearButtonMode="always"
                 secureTextEntry={true}
                 password={true}

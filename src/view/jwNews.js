@@ -1,70 +1,34 @@
 import React, {Component} from 'react';
 import {
     View,
-    Text,
     StyleSheet,
-    TouchableOpacity,
     ScrollView,
-    Image,
-    RefreshControl
+    RefreshControl,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient'
+import TouchableScale from 'react-native-touchable-scale'
 
-import { Card, List, WingBlank, WhiteSpace } from 'antd-mobile-rn';
+import { ListItem } from 'react-native-elements';
 
-const Item = List.Item;
-const Brief = Item.Brief;
+const newsColor = [
+    {
+      linearGradientColors: ['#FF9800', '#F44336'],
+    },
+    {
+      linearGradientColors: ['#3F51B5', '#2196F3'],
+    },
+    {
+      linearGradientColors: ['#FFD600', '#FF9800'],
+    },
+    {
+      linearGradientColors: ['#4CAF50', '#8BC34A'],
+    },
+    {
+      linearGradientColors: ['#F44336', '#E91E63'],
+    },
+];
 
 
-class NewsDetail extends Component{
-    render() {
-        return (
-            <WebView
-                //自动设置样式
-                automaticallyAdjustContentInsets={true}
-                source={{url:'http://jwzx.cqu.pt/fileShowContent.php?id=5995'}}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                startInLoadingState={true}
-                scalesPageToFit={false}
-            />
-        );
-    }
-}
-
-class CardItem extends Component{
-    render(){
-      return(
-        <List>
-            <Item
-            onClick={() => this.onClick()}
-            >
-                <WhiteSpace/>
-                <WingBlank>
-                    <Card>
-                        <Card.Header
-                            title={'教务公告'}
-                            thumbStyle={{ width: 30, height: 30 }}
-                            extra={this.props.detail.pubTime}
-                        />
-                        <Card.Body>
-                            <View style={{ height: 42 }}>
-                                <Text style={{ marginLeft: 16 }}>{this.props.detail.title}</Text>
-                            </View>
-                        </Card.Body>
-                    </Card>
-                </WingBlank>
-                <WhiteSpace/>
-            </Item>
-        </List>
-      );
-    }
-
-    onClick(){
-        this.props.onClick();
-    }
-}
-
-    
 export default class App extends Component {
 
     constructor(props: any) {
@@ -75,11 +39,9 @@ export default class App extends Component {
         };
     }
 
-
     componentWillMount() {
         this._fetchData()
     }
-    
 
     _fetchData() {
         let url = 'https://we.cqu.pt/api/news/jw_list.php?page=1'
@@ -103,7 +65,6 @@ export default class App extends Component {
         .catch(err => {
         });
     }
-
 
     static navigationOptions = ({navigation, screenProps}) => ({
 
@@ -134,10 +95,6 @@ export default class App extends Component {
 
     });
 
-    renderExpenseItem(item , i) {
-        return <CardItem navigation={this.props.navigation} detail={item} key={i} onClick={()=>this.onClick(i)}/>; 
-    }
-
     _onRefresh() {
         this.setState({
           isRefreshing: true,
@@ -153,14 +110,14 @@ export default class App extends Component {
             'NewsDetail',
             {
               'title': '详情',
-              'url': 'http://jwzx.cqu.pt/fileShowContent.php?id=' + this.state.details[i].fileId
+              'url': 'http://jwzx.cqu.pt/fileShowContent.php?id=' + this.state.details[i].articleid
             }
         )
     }
 
     render() {
         return (
-        <ScrollView
+            <ScrollView
             style={{ flex: 1, backgroundColor: '#f5f5f9' }}
             automaticallyAdjustContentInsets={false}
             showsHorizontalScrollIndicator={false}
@@ -173,11 +130,42 @@ export default class App extends Component {
                 title= {this.state.isRefreshing? '刷新中....':'下拉刷新'}
                 />
             }
-        >
-            {
-                this.state.details.map((item,i)=>this.renderExpenseItem(item,i))
-            }
-        </ScrollView>
+            >
+                <View>{
+                    this.state.details.map((l, i) => (
+                        <ListItem
+                            key={i}
+                            component={TouchableScale}
+                            friction={90} //
+                            tension={100} // These props are passed to the parent component (here TouchableScale)
+                            activeScale={0.95} //
+                    
+                            linearGradientProps={{
+                                colors: newsColor[i%4].linearGradientColors,
+                                start: {x:1, y:0},
+                                end: {x:0.2, y:0},
+                            }}
+                            ViewComponent={LinearGradient}
+                            title={l.title}
+                            onPress={() => this.onClick(i)}
+                            titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                            titleProps={{
+                                numberOfLines: 1,
+                            }}
+                            subtitleStyle={{ color: 'white' }}
+                            subtitle={l.time}
+                            chevronColor="white"
+                            chevron
+                            containerStyle={{
+                                marginHorizontal: 16,
+                                marginVertical: 8,
+                                borderRadius: 8,
+                            }}
+                        />
+                    ))
+                }
+                </View>
+            </ScrollView>
         );
     }
 }

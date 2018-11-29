@@ -8,6 +8,7 @@ import {
     RefreshControl
 } from 'react-native';
 
+import { PricingCard } from 'react-native-elements';
 import storage from '../../utils/Storage';
 import Utils from './utils.js';
 
@@ -118,21 +119,32 @@ class ElectInfo extends Component{
                         title= {this.state.isRefreshing? '刷新中....':'下拉刷新'}
                         />
                     }
-                    style={{marginTop: Utils.size.height/3}}
+                    style={{marginTop: Utils.size.height/6}}
                 >
-                    <Text>寝室为 {this.state.buildingNum} 栋，{this.state.roomNum} 寝室</Text>
-                    <Text>当月用电为 {this.state.elec_spend} 度</Text>
-                    <Text>当月电费为 {this.state.elec_cost[0]}.{this.state.elec_cost[1]} 元</Text>
-                    <Text>截止时间 {this.state.record_time}</Text>
-                    <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={
-                        () => {
-                            this.props.navigation.navigate('Bind',{
-                                'title':'绑定寝室',
-                            })
-                        }
-                    }>
-                        <Text style={{color: 'white'}}>切绑寝室</Text>
-                    </TouchableOpacity>
+                    <PricingCard
+                    color="#38A9F6"
+                    title="电费详情"
+                    price={typeof(this.state.elec_cost[0]) == "undefined"?
+                        "¥0.00":
+                        "¥" + this.state.elec_cost[0] + "." + this.state.elec_cost[1]
+                    }
+                    info={[
+                        "寝室:" + this.state.buildingNum + "-" + this.state.roomNum, 
+                        "用电量:" + this.state.elec_spend + " 度", 
+                        "统计截止时间:" + this.state.record_time
+                    ]}
+                    button={{
+                        title: '切换寝室', 
+                        icon: 'transform', 
+                        color: '#38A9F6'
+                    }}
+                    onButtonPress={() => {
+                        this.props.navigation.navigate('Bind',{
+                            'title':'绑定寝室',
+                        })
+                    }}
+                    />
+
                 </ScrollView>
             </View>
         );

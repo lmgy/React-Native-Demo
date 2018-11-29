@@ -55,6 +55,24 @@ class MainView extends Component {
         size:60,
         color:"#FF9A05",
         component: 'Todo'
+      },
+      {
+        key:4,
+        title:"申请教室",
+        isFA: false,
+        icon: "md-home",
+        size:60,
+        color:"#bfeabc",
+        component: 'applyClassroom'
+      },
+      {
+        key:5,
+        title:"公交卡余额",
+        isFA: false,
+        icon: "md-card",
+        size:60,
+        color:"#a1a0df",
+        component: 'busCardMoney'
       }]
     }
   }

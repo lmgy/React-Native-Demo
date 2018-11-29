@@ -55,7 +55,7 @@ export default class App extends Component {
         }).then(ret => {
           if(ret.status==true){
 
-              this._fetchData(ret.stuNum)
+              this._fetchData(ret.stuNum, ret.idNum)
             
           }
         }).catch()
@@ -64,20 +64,21 @@ export default class App extends Component {
 
     
 
-    _fetchData(stuNum) {
-        let url = 'https://wx.idsbllp.cn/api/examGrade'
-        let params = {
-            "stuNum":stuNum
-        };
+    _fetchData(stuNum, idNum) {
+        let url = 'https://wx.redrock.team/api/examGrade'
+        let params = 'stuNum=' + stuNum + '&idNum=' + idNum
+        console.log(params)
         fetch(url,{
             method:'POST',
             headers:{
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
+              'Accept': 'application/x-www-form-urlencoded',
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Host': 'wx.redrock.team',
             },
-            body:JSON.stringify(params)
+            body:params
         }).then(response => response.json())
         .then(json => {
+        console.log(json)
         if (json.status == 200) {
           this.setState({
             details: json.data
@@ -88,6 +89,7 @@ export default class App extends Component {
         }
         })
         .catch(err => {
+            console.warn(err)
         });
     }
 

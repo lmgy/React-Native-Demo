@@ -1,5 +1,5 @@
 {
-  "name": "教务在线",
+  "name": "rnjwzx",
   "version": "2.1.6",
   "private": true,
   "author": "lmgy",
@@ -20,14 +20,17 @@
   },
   "dependencies": {
     "antd-mobile-rn": "^2.2.1",
+    "graceful-fs": "^4.1.15",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-action-button": "^2.8.5",
     "react-native-easy-grid": "^0.2.0",
-    "react-native-elements": "^0.19.1",
+    "react-native-elements": "^1.0.0-beta7",
+    "react-native-linear-gradient": "^2.4.4",
     "react-native-storage": "^0.2.2",
     "react-native-swiper": "^1.5.13",
-    "react-native-vector-icons": "^5.0.0",
+    "react-native-touchable-scale": "^2.0.0",
+    "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^2.13.0"
   }
 }
